@@ -15,7 +15,7 @@ bool comp(query a, query b)
 {
     if(a.l / BLK != b.l/BLK) return a.l/BLK < b.l/BLK;
     
-    return a.r/BLK < b.r/BLK;
+    return a.r < b.r;
 }
 
 void add(int pos)
