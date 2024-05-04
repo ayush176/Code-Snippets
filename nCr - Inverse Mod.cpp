@@ -28,3 +28,45 @@ public:
         return ((fac[n]*inverseMod(fac[r]))%mod * inverseMod(fac[n-r]))%mod;
     }
 };
+
+
+/////////////////////////////////////////////////////////////////////////
+// if numbers are big - use 128 bits integer for powers
+
+QUES - Modular GCD codechef
+
+#include <bits/stdc++.h>
+using namespace std;
+#define ll unsigned long long
+using uint128 = __uint128_t;
+ll power(ll a, ll b, ll n){
+    ll res = 1;
+    a = a%n;
+    while(b){
+        if(b&1) res = ((uint128)res*a)%n;
+        b>>=1;
+        a = ((uint128)a*a)%n;
+    }
+    return res%n;
+}
+int main() {
+	// your code goes here
+	
+	int t;
+	cin>>t;
+	while(t--){
+	    ll a,b,n;
+	    cin>>a>>b>>n;
+	    ll mod = 1e9+7ll;
+	    ll num = a-b;
+	    if(a==b){
+	        cout<<((power(a,n,mod)+ power(b,n,mod))%mod)<<"\n";
+	        continue;
+	    }
+	    ll fir = power(a,n,num);
+	    ll sec = power(b,n,num);
+	    cout<< (__gcd((fir+sec)%num,num)%mod)<<"\n";
+	}
+
+}
+
